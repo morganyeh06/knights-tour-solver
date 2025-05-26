@@ -5,9 +5,10 @@ import Button from './Button';
 
 interface Props {
     parentCallbacks: Array<(n: number) => void>;
+    optionChanger: (c: string) => void;
 }
 
-export default function ActionBox({parentCallbacks} : Props) {
+export default function ActionBox({parentCallbacks, optionChanger} : Props) {
     const knights = ["White", "Black"];
 
     return (<>
@@ -15,7 +16,7 @@ export default function ActionBox({parentCallbacks} : Props) {
             <div className="settings">
                 <NumInput id="size" minVal={1} maxVal={10} defaultVal={8} text="Board Size (nxn)" parentCallback={parentCallbacks[0]}/>
                 <NumInput id="delay" minVal={100} maxVal={1000} defaultVal={200} text="Move Delay (ms)" parentCallback={parentCallbacks[1]}/>
-                <Dropdown name="colors" id="knight-color" text="Knight Colour" options={knights}/>
+                <Dropdown name="colors" id="knight-color" text="Knight Colour" options={knights} optionChanger={optionChanger}/>
             </div>
             
             <h2 id="instructions">Select a Starting Position on the Board</h2>

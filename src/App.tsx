@@ -14,7 +14,7 @@ function App() {
   return (<>
     <Banner/>
     <div className="body">
-        <ActionBox parentCallbacks={functions}></ActionBox>
+        <ActionBox parentCallbacks={functions} optionChanger={setColour}></ActionBox>
         <Board size={size}/>
     </div>
     </>);

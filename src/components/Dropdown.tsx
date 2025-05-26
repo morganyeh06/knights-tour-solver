@@ -5,15 +5,24 @@ interface Props {
     id: string;
     text: string;
     options: Array<string>;
+    optionChanger: (c: string) => void;
 }
 
-export default function Dropdown({name, id, text, options} : Props) {
+export default function Dropdown({name, id, text, options, optionChanger} : Props) {
     const dropdownOptions = options.map((opt) => (<option key={opt}>{opt}</option>));
+
+    function handleChange() {
+        var dropdown = document.getElementById(id) as HTMLSelectElement;
+        var index = dropdown!.selectedIndex;
+        var option = dropdown.options[index].text;
+
+        optionChanger(option);
+    }
 
     return (<>
         <div className="field-row">
             <label className="input-label" htmlFor={id}>{text}</label>
-            <select name={name} className="form-control input-field" id={id}>
+            <select name={name} className="form-control input-field" id={id} onChange={handleChange}>
                 {dropdownOptions}
             </select>
         </div>
