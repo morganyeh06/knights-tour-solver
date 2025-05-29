@@ -8,7 +8,7 @@ function App() {
   const [size, setSize] = useState(8);
   const [delay, setDelay] = useState(200);
   const [colour, setColour] = useState("White");
-  const [startSquare, setStartSquare] = useState([0, 0]);
+  const [startSquare, setStartSquare] = useState([-1, -1]);
 
   // handleSizeChange(num) sets size to num and
   // sets startSquare to [-1, -1] if it is out of bounds
@@ -26,7 +26,7 @@ function App() {
   return (<>
     <Banner/>
     <div className="body">
-        <ActionBox parentCallbacks={functions} optionChanger={setColour}></ActionBox>
+        <ActionBox startSquare={startSquare} parentCallbacks={functions} optionChanger={setColour}></ActionBox>
         <Board size={size} startingCoord={startSquare} knightColour={colour} clickHandler={setStartSquare}/>
     </div>
     </>);

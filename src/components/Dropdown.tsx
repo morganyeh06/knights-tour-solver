@@ -22,7 +22,7 @@ export default function Dropdown({name, id, text, options, optionChanger} : Prop
     return (<>
         <div className="field-row">
             <label className="input-label" htmlFor={id}>{text}</label>
-            <select name={name} className="form-control input-field" id={id} onChange={handleChange}>
+            <select name={name} className="form-select input-field" id={id} onChange={handleChange}>
                 {dropdownOptions}
             </select>
         </div>

@@ -5,11 +5,13 @@ import Button from './Button';
 
 interface Props {
     parentCallbacks: Array<(n: number) => void>;
+    startSquare: Array<number>;
     optionChanger: (c: string) => void;
 }
 
-export default function ActionBox({parentCallbacks, optionChanger} : Props) {
+export default function ActionBox({parentCallbacks, startSquare, optionChanger} : Props) {
     const knights = ["White", "Black"];
+    const disabled = (startSquare[0] === -1 && startSquare[1] === -1) ? true : false;
 
     return (<>
         <div className="box">
@@ -20,6 +22,6 @@ export default function ActionBox({parentCallbacks, optionChanger} : Props) {
             </div>
             
             <h2 id="instructions">Select a Starting Position on the Board</h2>
-            <Button text="Solve" id="solve-button"/>
+            <Button text="Solve" id="solve-button" isDisabled={disabled}/>
         </div></>)
 }

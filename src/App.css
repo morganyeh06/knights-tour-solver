@@ -178,6 +178,24 @@
   right: 0;
 }
 
+.disabled {
+  text-align: center;
+  margin-top: 40px;
+  padding: 8px;
+  width: 200px;
+
+  border-radius: 8px;
+  background-color: #3d85c6;
+  border: none;
+
+  color: white;
+  font-size: 25px;
+  font-weight: 500;
+
+  opacity: 0.6;
+  cursor: default;
+}
+
 /* ---------------------------------------------- Board ------------------------------------------------------- */
 
 .board {
@@ -187,7 +205,6 @@
 }
 
 .square {
-  
   border: none;
 }
 
