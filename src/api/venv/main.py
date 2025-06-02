@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-# all possible knight moves written as (dx, dy)
-# eg. (1, 2) means right 1 up 2
+# all possible knight moves written as (dr, dc)
+# eg. (1, 2) means down 1 row, right 2 columns
 KNIGHT_MOVES = [
         (2, 1), (1, 2), (-1, 2), (-2, 1),
         (-2, -1), (-1, -2), (1, -2), (2, -1)
@@ -39,87 +39,87 @@ def getMoveListJSON():
 def inRange(low, n, high):
     return low <= n and n < high
 
-# validMove(board, x, y, n) returns true if a move to 
-# position (x, y) on an nxn board is valid, false otherwise
+# validMove(board, r, c, n) returns true if a move to 
+# position (r, c) on an nxn board is valid, false otherwise
 # requires: n > 0
-def validMove(board, x, y, n):
-    return inRange(0, x, n) and inRange(0, y, n) and board[x][y] == -1
+def validMove(board, r, c, n):
+    return inRange(0, r, n) and inRange(0, c, n) and board[r][c] == -1
 
-# countNextMoves(board, x, y) returns the number of 
-# valid knight moves from position (x, y) on board
-# requires: (x, y) is valid position on board
-def countNextMoves(board, x, y):
+# countNextMoves(board, r, c) returns the number of 
+# valid knight moves from position (r, c) on board
+# requires: (r, c) is valid position on board
+def countNextMoves(board, r, c):
     count = 0
     n = len(board)
 
     # check every move and determine if valid
-    for dx, dy in KNIGHT_MOVES:
-        next_x = x + dx
-        next_y = y + dy
+    for dr, dc in KNIGHT_MOVES:
+        next_r = r + dr
+        next_c = c + dc
 
-        if(validMove(board, next_x, next_y, n)):
+        if(validMove(board, next_r, next_c, n)):
             count += 1
     
     return count
 
-# getNextMoves(board, x, y) returns a list of valid
-# moves from position (x, y) on board and sorts them in
+# getNextMoves(board, r, c) returns a list of valid
+# moves from position (r, c) on board and sorts them in
 # increasing order of possible moves from new position
-# requires: (x, y) is valid position on board
-def getNextMoves(board, x, y):
+# requires: (r, c) is valid position on board
+def getNextMoves(board, r, c):
     options = []
     n = len(board)
 
-    for i, (dx, dy) in enumerate(KNIGHT_MOVES):
-        next_x = x + dx
-        next_y = y + dy
+    for i, (dr, dc) in enumerate(KNIGHT_MOVES):
+        next_r = r + dr
+        next_c = c + dc
 
-        if(validMove(board, next_x, next_y, n)):
+        if(validMove(board, next_r, next_c, n)):
             # add possible movecount and index to options
-            options.append((countNextMoves(board, next_x, next_y), i))
+            options.append((countNextMoves(board, next_r, next_c), i))
     
     # sort in order of number of next moves
     options.sort()
     return options
 
 
-# knightsTourUntil(n, x, y, board, step) traverses
+# knightsTourUntil(n, r, c, board, step) traverses
 # the board, returning true if successful and false otherwise
-# requires: n > 0, (x, y) is valid position on board
-def knightsTourUntil(n, x, y, board, step):
+# requires: n > 0, (r, c) is valid position on board
+def knightsTourUntil(n, r, c, board, step):
     # end if all squares visited
     if step == n * n:
         return True
     
     # get possible moves from current position
-    next_moves = getNextMoves(board, x, y)
+    next_moves = getNextMoves(board, r, c)
     for _, index in next_moves:
-        next_x = x + KNIGHT_MOVES[index][0]
-        next_y = y + KNIGHT_MOVES[index][1]
+        next_r = r + KNIGHT_MOVES[index][0]
+        next_c = c + KNIGHT_MOVES[index][1]
 
         # mark next move with current step number
-        board[next_x][next_y] = step
+        board[next_r][next_c] = step
 
         # traverse from new position
-        if knightsTourUntil(n, next_x, next_y, board, step + 1):
+        if knightsTourUntil(n, next_r, next_c, board, step + 1):
             return True
         
         # unmark square if search fails
-        board[next_x][next_y] = -1
+        board[next_r][next_c] = -1
     
     return False
     
 
-# knightsTour(n, x, y) creates an nxn board and attempts to
-# solve starting from position (x, y), returning completed
+# knightsTour(n, r, c) creates an nxn board and attempts to
+# solve starting from position (r, c), returning completed
 # board or [[-1]] if no is solution found
-# requires: n >= 1, (x, y) is a valid position on an nxn board
-def knightsTour(n, x, y):
+# requires: n >= 1, (r, c) is a valid position on an nxn board
+def knightsTour(n, r, c):
     board = [[-1] * n for _ in range(n)]
-    board[x][y] = 0 # temporarily mark starting position
+    board[r][c] = 0 # temporarily mark starting position
 
     # traverse board starting from (x, y)
-    if not knightsTourUntil(n, x, y, board, 1):
+    if not knightsTourUntil(n, r, c, board, 1):
         return [[-1]] # no solution
     
     # confirm only starting square was marked initially
@@ -145,4 +145,4 @@ def getMoveList(n, res):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8080)
+    app.run(debug=False, port=8080)

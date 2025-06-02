@@ -7,9 +7,10 @@ interface Props {
     parentCallbacks: Array<(n: number) => void>;
     startSquare: Array<number>;
     optionChanger: (c: string) => void;
+    clickHandler: () => void;
 }
 
-export default function ActionBox({parentCallbacks, startSquare, optionChanger} : Props) {
+export default function ActionBox({parentCallbacks, startSquare, optionChanger, clickHandler} : Props) {
     const knights = ["White", "Black"];
     const disabled = (startSquare[0] === -1 && startSquare[1] === -1) ? true : false;
 
@@ -22,6 +23,6 @@ export default function ActionBox({parentCallbacks, startSquare, optionChanger} 
             </div>
             
             <h2 id="instructions">Select a Starting Position on the Board</h2>
-            <Button text="Solve" id="solve-button" isDisabled={disabled}/>
+            <Button text="Solve" id="solve-button" isDisabled={disabled} clickFunction={clickHandler}/>
         </div></>)
 }
