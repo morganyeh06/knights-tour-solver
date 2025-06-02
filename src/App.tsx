@@ -9,7 +9,7 @@ function App() {
   const [size, setSize] = useState(8);
   const [delay, setDelay] = useState(200);
   const [colour, setColour] = useState("White");
-  const [startSquare, setStartSquare] = useState([0, 0]);
+  const [startSquare, setStartSquare] = useState([-1, -1]);
 
   async function fetchAPI() {
     const base = "http://127.0.0.1:8080/?size=" + size + "&row=" + startSquare[0] + "&col=" + startSquare[1];
@@ -18,7 +18,10 @@ function App() {
   }
 
   useEffect(() => {
-    fetchAPI();
+    if(startSquare[0] !== -1 && startSquare[1] !== -1) {
+      fetchAPI();
+    }
+    
   }, [size, startSquare]);
 
   // handleSizeChange(num) sets size to num and
