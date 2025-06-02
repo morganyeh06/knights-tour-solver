@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from "axios"
 import './App.css'
 import Banner from './components/Banner'
 import ActionBox from './components/ActionBox'
@@ -8,7 +9,17 @@ function App() {
   const [size, setSize] = useState(8);
   const [delay, setDelay] = useState(200);
   const [colour, setColour] = useState("White");
-  const [startSquare, setStartSquare] = useState([-1, -1]);
+  const [startSquare, setStartSquare] = useState([0, 0]);
+
+  async function fetchAPI() {
+    const base = "http://127.0.0.1:8080/?size=" + size + "&row=" + startSquare[0] + "&col=" + startSquare[1];
+    const response = await axios.get(base);
+    console.log(response.data.moves);
+  }
+
+  useEffect(() => {
+    fetchAPI();
+  }, [size, startSquare]);
 
   // handleSizeChange(num) sets size to num and
   // sets startSquare to [-1, -1] if it is out of bounds
