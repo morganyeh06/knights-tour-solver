@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from "axios"
 import './App.css'
 import Banner from './components/Banner'
@@ -15,16 +15,46 @@ function App() {
   // returns list of moves to solve knight's tour or [[-1]]
   // if there is no solution found
   async function fetchAPI() {
-    const base = "http://127.0.0.1:8080/?size=" + size 
+    const url = "http://127.0.0.1:8080/?size=" + size 
                   + "&row=" + startSquare[0] + "&col=" + startSquare[1];
-    const response = await axios.get(base);
-    console.log(response.data.moves);
+    const response = await axios.get(url);
+    return response.data.moves;
   }
 
+  // sleep(ms) pauses for a specified number of ms
+  function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
   // solve() performs Knights Tour solving and animation when button is clicked
-  function solve() {
-    fetchAPI();
+  async function solve() {
+    const moveList = await fetchAPI();
+
+    // check if a solution was found
+    if(moveList.length === 1 && moveList[0][0] === -1) {
+      console.log("No solution found");
+    } else {
+      console.log(moveList);
+      const len = moveList.length;
+
+      for(let i = 1; i < len; i++) {
+        const coord = moveList[i];
+        const r = coord[0];
+        const c = coord[1];
+        const ID = "row " + r + " col " + c;
+        const square = document.getElementById(ID);
+
+        setStartSquare(coord);
+        
+        if(square !== null) {
+          console.log(square.id + " | " + ID);
+        }
+
+        await sleep(delay);
+      }
+    }
+    
+    
   }
 
   // handleSizeChange(num) sets size to num and

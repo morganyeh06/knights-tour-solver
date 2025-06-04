@@ -29,12 +29,12 @@ export default function Board( {size, startingCoord, knightColour, clickHandler}
                 // determine colour of square
                 var colour = ((i + j) % 2 == 0) ? light : dark;
 
-                let coordKey = "(" + i + ", " + j + ")";
+                let coordKey = "row " + j + " col " + i;
                 let coord = [j, i];
                 let isSelected = startingCoord[0] === j && startingCoord[1] == i;
 
                 // create square, display image if square is selected
-                row.push(<div key={coordKey} className={classes} style={colour} onClick={() => clickHandler(coord)}>
+                row.push(<div key={coordKey} id={coordKey} className={classes} style={colour} onClick={() => clickHandler(coord)}>
                             {isSelected ? <img src={knightColour === "White" ? WhiteKnight : BlackKnight} alt="white knight"/> : null}
                         </div>);
             }

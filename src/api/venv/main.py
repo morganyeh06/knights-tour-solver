@@ -21,8 +21,10 @@ def getMoveListJSON():
     startCol = int(request.args.get('col'))
 
     res = knightsTour(boardSize, startRow, startCol)
-    list = [[-1]]
-    if not res == [[-1]]:
+    list = None
+    if res == [[-1]]:
+        list = res
+    else :
         list = getMoveList(boardSize, res)
 
     return jsonify(
