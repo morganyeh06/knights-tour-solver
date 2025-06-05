@@ -11,6 +11,8 @@ function App() {
   const [colour, setColour] = useState("White");
   const [startSquare, setStartSquare] = useState([-1, -1]);
   const [isRunning, setIsRunning] = useState(false);
+  const [moveMap, setMoveMap] = useState(new Map());
+
 
   // fetchAPI() retrieves result of api call to main.py,
   // returns list of moves to solve knight's tour or [[-1]]
@@ -27,35 +29,37 @@ function App() {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-  // solve() performs Knights Tour solving and animation when button is clicked
-  async function solve() {
+  // solveTour() performs Knights Tour solving and animation when button is clicked
+  async function solveTour() {
     setIsRunning(true);
+    moveMap.clear();
+
     const moveList = await fetchAPI();
 
     // check if a solution was found
     if(moveList.length === 1 && moveList[0][0] === -1) {
       console.log("No solution found");
     } else {
-      console.log(moveList);
       const len = moveList.length;
 
-      for(let i = 1; i < len; i++) {
+      for(let i = 0; i < len; i++) {
         const coord = moveList[i];
         const r = coord[0];
         const c = coord[1];
         const ID = "row " + r + " col " + c;
         const square = document.getElementById(ID);
 
+        // update active square and add to map
         setStartSquare(coord);
-        
-        if(square !== null) {
-          console.log(square.id + " | " + ID);
-        }
+        setMoveMap(moveMap.set(ID, i+1));
 
-        await sleep(delay);
+        if(i !== 0) {
+          await sleep(delay);
+        }
+        
       }
     }
-    
+    console.log(moveMap);
     setIsRunning(false);
   }
 
@@ -75,8 +79,8 @@ function App() {
   return (<>
     <Banner/>
     <div className="body">
-        <ActionBox isDisabled={isRunning} startSquare={startSquare} parentCallbacks={functions} optionChanger={setColour} clickHandler={solve}></ActionBox>
-        <Board size={size} startingCoord={startSquare} knightColour={colour} isDisabled={isRunning} clickHandler={setStartSquare}/>
+        <ActionBox isDisabled={isRunning} startSquare={startSquare} parentCallbacks={functions} optionChanger={setColour} clickHandler={solveTour}></ActionBox>
+        <Board size={size} startingCoord={startSquare} knightColour={colour} isDisabled={isRunning} moves={moveMap} clickHandler={setStartSquare}/>
     </div>
     </>);
 }
