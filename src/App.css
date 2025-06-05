@@ -208,7 +208,7 @@
   border: none;
 }
 
-.square:hover {
+.is-active:hover {
   cursor: pointer;
   box-shadow: inset 0px 0px 2px 2px yellow;
 }

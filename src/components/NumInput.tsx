@@ -7,10 +7,11 @@ interface Props {
     maxVal: number;
     defaultVal: number;
     text: string;
+    isDisabled: boolean
     parentCallback: (num: number) => void;
 }
 
-export default function NumInput({id, minVal, maxVal, defaultVal, text, parentCallback} : Props) {
+export default function NumInput({id, minVal, maxVal, defaultVal, text, isDisabled, parentCallback} : Props) {
     
     function handleChange() {
         const num = parseInt((document.getElementById(id) as HTMLInputElement).value);
@@ -22,7 +23,7 @@ export default function NumInput({id, minVal, maxVal, defaultVal, text, parentCa
             <label className="input-label" htmlFor={id}>{text}</label>
             <input type="number" className="form-control input-field" 
             id={id} min={minVal} max={maxVal} defaultValue={defaultVal}
-            onChange={handleChange}></input>
+            onChange={handleChange} disabled={isDisabled}></input>
         </div>
     </>);
 }

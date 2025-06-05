@@ -10,6 +10,7 @@ function App() {
   const [delay, setDelay] = useState(200);
   const [colour, setColour] = useState("White");
   const [startSquare, setStartSquare] = useState([-1, -1]);
+  const [isRunning, setIsRunning] = useState(false);
 
   // fetchAPI() retrieves result of api call to main.py,
   // returns list of moves to solve knight's tour or [[-1]]
@@ -28,6 +29,7 @@ function App() {
 
   // solve() performs Knights Tour solving and animation when button is clicked
   async function solve() {
+    setIsRunning(true);
     const moveList = await fetchAPI();
 
     // check if a solution was found
@@ -54,7 +56,7 @@ function App() {
       }
     }
     
-    
+    setIsRunning(false);
   }
 
   // handleSizeChange(num) sets size to num and
@@ -73,8 +75,8 @@ function App() {
   return (<>
     <Banner/>
     <div className="body">
-        <ActionBox startSquare={startSquare} parentCallbacks={functions} optionChanger={setColour} clickHandler={solve}></ActionBox>
-        <Board size={size} startingCoord={startSquare} knightColour={colour} clickHandler={setStartSquare}/>
+        <ActionBox isDisabled={isRunning} startSquare={startSquare} parentCallbacks={functions} optionChanger={setColour} clickHandler={solve}></ActionBox>
+        <Board size={size} startingCoord={startSquare} knightColour={colour} isDisabled={isRunning} clickHandler={setStartSquare}/>
     </div>
     </>);
 }

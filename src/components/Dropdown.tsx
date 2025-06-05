@@ -5,10 +5,11 @@ interface Props {
     id: string;
     text: string;
     options: Array<string>;
+    isDisabled: boolean;
     optionChanger: (c: string) => void;
 }
 
-export default function Dropdown({name, id, text, options, optionChanger} : Props) {
+export default function Dropdown({name, id, text, options, isDisabled, optionChanger} : Props) {
     const dropdownOptions = options.map((opt) => (<option key={opt}>{opt}</option>));
 
     function handleChange() {
@@ -22,7 +23,7 @@ export default function Dropdown({name, id, text, options, optionChanger} : Prop
     return (<>
         <div className="field-row">
             <label className="input-label" htmlFor={id}>{text}</label>
-            <select name={name} className="form-select input-field" id={id} onChange={handleChange}>
+            <select name={name} className="form-select input-field" id={id} onChange={handleChange} disabled={isDisabled}>
                 {dropdownOptions}
             </select>
         </div>
