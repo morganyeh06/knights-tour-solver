@@ -26,7 +26,7 @@ export default function ActionBox({states,  activeSquare,  numberChangers, click
     return (<>
         <div className="box">
             <div className="settings">
-                <NumInput id="size" minVal={5} maxVal={10} defaultVal={8} text="Board Size (nxn)" changeHandler={handleSizeChange} isDisabled={isDisabled}/>
+                <NumInput id="size" minVal={5} maxVal={12} defaultVal={8} text="Board Size (nxn)" changeHandler={handleSizeChange} isDisabled={isDisabled}/>
                 <NumInput id="delay" minVal={0} maxVal={1000} defaultVal={200} text="Move Delay (ms)" changeHandler={handleDelayChange} isDisabled={isDisabled}/>
                 <Dropdown name="colors" id="knight-color" text="Knight Colour" options={knights} optionChanger={optionChanger} isDisabled={isDisabled}/>
             </div>

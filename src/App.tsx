@@ -24,8 +24,16 @@ function App() {
   async function fetchAPI() {
     const url = "http://127.0.0.1:8080/?size=" + size 
                   + "&row=" + activeSquare[0] + "&col=" + activeSquare[1];
-    const response = await axios.get(url);
-    return response.data.moves;
+
+    try {
+      const response = await axios.get(url);
+      return response.data.moves;
+    } catch(error) {
+        alert("Error Fetching data\n" + error);
+        setIsRunning(false);
+    }
+    
+    
   }
 
   // sleep(ms) pauses for a specified number of ms
