@@ -8,4 +8,4 @@ export default function Banner() {
             <div className="switch"><ThemeSwitch/></div>
         </div>
     </>)
-}
+};

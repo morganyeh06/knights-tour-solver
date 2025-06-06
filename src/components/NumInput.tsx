@@ -26,4 +26,4 @@ export default function NumInput({id, minVal, maxVal, defaultVal, text, isDisabl
             onChange={handleChange} disabled={isDisabled}></input>
         </div>
     </>);
-}
+};

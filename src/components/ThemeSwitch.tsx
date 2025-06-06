@@ -20,4 +20,4 @@ export default function ThemeSwitch() {
         <input type="radio" className="btn-check" name="options" id="dark"></input>
         <label className="btn btn-outline-primary" htmlFor="dark" style={darkStyle}>Dark</label>
     </>)
-}
+};

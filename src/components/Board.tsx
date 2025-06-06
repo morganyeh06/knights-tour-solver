@@ -63,4 +63,4 @@ export default function Board( {isDisabled, moves, size, startingCoord, knightCo
             {squares}
         </div>
     </>)
-}
+};

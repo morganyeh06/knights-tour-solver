@@ -141,7 +141,7 @@
   width: 200px;
 
   border-radius: 8px;
-  background-color: #3d85c6;
+  
   border: none;
 
   color: white;
@@ -177,6 +177,19 @@
   opacity: 1;
   right: 0;
 }
+
+#solve-button {
+  background-color: #3d85c6;
+}
+
+#reset-button {
+  background-color: #E34234;
+}
+
+#reset-button span:after {
+  content: '\21ba';
+}
+
 
 .disabled {
   text-align: center;

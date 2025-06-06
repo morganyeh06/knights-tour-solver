@@ -11,6 +11,7 @@ function App() {
   const [colour, setColour] = useState("White");
   const [startSquare, setStartSquare] = useState([-1, -1]);
   const [isRunning, setIsRunning] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
   const [moveMap, setMoveMap] = useState(new Map());
 
 
@@ -32,7 +33,6 @@ function App() {
   // solveTour() performs Knights Tour solving and animation when button is clicked
   async function solveTour() {
     setIsRunning(true);
-    moveMap.clear();
 
     const moveList = await fetchAPI();
 
@@ -47,20 +47,29 @@ function App() {
         const r = coord[0];
         const c = coord[1];
         const ID = "row " + r + " col " + c;
-        const square = document.getElementById(ID);
 
         // update active square and add to map
         setStartSquare(coord);
         setMoveMap(moveMap.set(ID, i+1));
 
+        // wait if not first move
         if(i !== 0) {
           await sleep(delay);
         }
         
       }
     }
-    console.log(moveMap);
+    setIsFinished(true);
+  }
+
+  // clearBoard() removes knight and numbers from board,
+  // re-enables input fields in ActionBox
+  function clearBoard() {
+    setStartSquare([-1, -1]);
+    setMoveMap(new Map());
+
     setIsRunning(false);
+    setIsFinished(false);
   }
 
   // handleSizeChange(num) sets size to num and
@@ -75,11 +84,12 @@ function App() {
   }
 
   const functions = [handleSizeChange, setDelay];
+  const clickHandlers = [solveTour, clearBoard];
 
   return (<>
     <Banner/>
     <div className="body">
-        <ActionBox isDisabled={isRunning} startSquare={startSquare} parentCallbacks={functions} optionChanger={setColour} clickHandler={solveTour}></ActionBox>
+        <ActionBox isDisabled={isRunning} isFinished={isFinished} startSquare={startSquare} parentCallbacks={functions} optionChanger={setColour} clickHandlers={clickHandlers}></ActionBox>
         <Board size={size} startingCoord={startSquare} knightColour={colour} isDisabled={isRunning} moves={moveMap} clickHandler={setStartSquare}/>
     </div>
     </>);

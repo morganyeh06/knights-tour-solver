@@ -28,4 +28,4 @@ export default function Dropdown({name, id, text, options, isDisabled, optionCha
             </select>
         </div>
     </>);
-}
+};
