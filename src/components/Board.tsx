@@ -4,16 +4,19 @@ import BlackKnight from "/src/assets/knight-black.png";
 
 interface Props {
     size: number;
-    startingCoord: Array<number>;
+    activeSquare: Array<number>;
     knightColour: string;
-    isDisabled: boolean;
-    isLoading: boolean;
+    states: Array<boolean>
     moves: Map<string, number>
     clickHandler: (pos: Array<number>) => void;
 }
 
-export default function Board( {isDisabled, isLoading, moves, size, startingCoord, knightColour, clickHandler} : Props) {
-    // CSS classes for styling
+export default function Board( {size, activeSquare, knightColour, states, moves, clickHandler} : Props) {
+    // states passed from parent
+    const isDisabled = states[0];
+    const isLoading = states[2]
+    
+    // CSS classes and styles
     var classes = isDisabled ? "square size-" + size : "square size-" + size + " is-active";
     const light = {backgroundColor: "#eeeed2"};
     const dark = {backgroundColor: "#769656" };
@@ -32,7 +35,7 @@ export default function Board( {isDisabled, isLoading, moves, size, startingCoor
         }
     }
 
-    // makeChessBoard displays a size x size chess board
+    // makeChessBoard() creates a size x size chess board
     function makeChessBoard() {
         let arr = [];
 
@@ -45,11 +48,12 @@ export default function Board( {isDisabled, isLoading, moves, size, startingCoor
 
                 const coordKey = "row " + j + " col " + i;
                 const coord = [j, i];
-                const isSelected = startingCoord[0] === j && startingCoord[1] == i;
+                const isActive = activeSquare[0] === j && activeSquare[1] == i;
 
                 // create square, display image if square is selected
+                // display move number in square if part of moves
                 row.push(<div key={coordKey} id={coordKey} className={classes} style={colour} onClick={() => handleClick(coord)}>
-                            {isSelected ? <img src={knightColour === "White" ? WhiteKnight : BlackKnight} alt="knight"/> : null}
+                            {isActive ? <img src={knightColour === "White" ? WhiteKnight : BlackKnight} alt="knight"/> : null}
                             {moves.has(coordKey) ? <p className="number" style={textColour}>{moves.get(coordKey)}</p> : null}
                         </div>);
             }

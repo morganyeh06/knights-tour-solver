@@ -8,14 +8,14 @@ interface Props {
     defaultVal: number;
     text: string;
     isDisabled: boolean
-    parentCallback: (num: number) => void;
+    changeHandler: (num: number) => void;
 }
 
-export default function NumInput({id, minVal, maxVal, defaultVal, text, isDisabled, parentCallback} : Props) {
+export default function NumInput({id, minVal, maxVal, defaultVal, text, isDisabled, changeHandler} : Props) {
     
     function handleChange() {
         const num = parseInt((document.getElementById(id) as HTMLInputElement).value);
-        parentCallback(num);
+        changeHandler(num);
     }
 
     return (<>
