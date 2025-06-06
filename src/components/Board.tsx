@@ -7,17 +7,20 @@ interface Props {
     startingCoord: Array<number>;
     knightColour: string;
     isDisabled: boolean;
+    isLoading: boolean;
     moves: Map<string, number>
     clickHandler: (pos: Array<number>) => void;
 }
 
-export default function Board( {isDisabled, moves, size, startingCoord, knightColour, clickHandler} : Props) {
+export default function Board( {isDisabled, isLoading, moves, size, startingCoord, knightColour, clickHandler} : Props) {
     // CSS classes for styling
     var classes = isDisabled ? "square size-" + size : "square size-" + size + " is-active";
     const light = {backgroundColor: "#eeeed2"};
     const dark = {backgroundColor: "#769656" };
     const lightText = {color: "#eeeed2"};
     const darkText = {color: "#769656" };
+    const darkBoard = {filter: "brightness(75%)"};
+    const lightBoard = {};
 
     let squares = makeChessBoard();
 
@@ -43,7 +46,6 @@ export default function Board( {isDisabled, moves, size, startingCoord, knightCo
                 const coordKey = "row " + j + " col " + i;
                 const coord = [j, i];
                 const isSelected = startingCoord[0] === j && startingCoord[1] == i;
-                const isInMap = moves.has(coordKey);
 
                 // create square, display image if square is selected
                 row.push(<div key={coordKey} id={coordKey} className={classes} style={colour} onClick={() => handleClick(coord)}>
@@ -58,9 +60,5 @@ export default function Board( {isDisabled, moves, size, startingCoord, knightCo
         return arr;
     }
 
-    return (<>
-        <div className="board">
-            {squares}
-        </div>
-    </>)
+    return (<div className="board" style={isLoading ? darkBoard : lightBoard}>{squares}</div>);
 };

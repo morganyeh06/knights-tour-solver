@@ -12,6 +12,7 @@ function App() {
   const [startSquare, setStartSquare] = useState([-1, -1]);
   const [isRunning, setIsRunning] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [moveMap, setMoveMap] = useState(new Map());
 
 
@@ -33,12 +34,16 @@ function App() {
   // solveTour() performs Knights Tour solving and animation when button is clicked
   async function solveTour() {
     setIsRunning(true);
+    setIsLoading(true);
+    await sleep(500);
 
     const moveList = await fetchAPI();
+    setIsLoading(false);
 
     // check if a solution was found
     if(moveList.length === 1 && moveList[0][0] === -1) {
-      console.log("No solution found");
+      setIsRunning(false);
+      alert("No solution found. Please choose a different starting position or board size.");
     } else {
       const len = moveList.length;
 
@@ -58,8 +63,10 @@ function App() {
         }
         
       }
+
+      setIsFinished(true);
     }
-    setIsFinished(true);
+    
   }
 
   // clearBoard() removes knight and numbers from board,
@@ -90,9 +97,12 @@ function App() {
     <Banner/>
     <div className="body">
         <ActionBox isDisabled={isRunning} isFinished={isFinished} startSquare={startSquare} parentCallbacks={functions} optionChanger={setColour} clickHandlers={clickHandlers}></ActionBox>
-        <Board size={size} startingCoord={startSquare} knightColour={colour} isDisabled={isRunning} moves={moveMap} clickHandler={setStartSquare}/>
+        <div className="right-panel">
+            {isLoading ? <div className="loader"></div> : null}
+            <Board size={size} startingCoord={startSquare} knightColour={colour} isDisabled={isRunning} isLoading={isLoading} moves={moveMap} clickHandler={setStartSquare}/>
+        </div>
     </div>
-    </>);
+  </>);
 }
 
 export default App
