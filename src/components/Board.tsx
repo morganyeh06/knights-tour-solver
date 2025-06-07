@@ -7,11 +7,12 @@ interface Props {
     activeSquare: Array<number>;
     knightColour: string;
     states: Array<boolean>
-    moves: Map<string, number>
+    moves: Map<string, number>;
+    sound: HTMLAudioElement;
     clickHandler: (pos: Array<number>) => void;
 }
 
-export default function Board( {size, activeSquare, knightColour, states, moves, clickHandler} : Props) {
+export default function Board( {size, activeSquare, knightColour, states, moves, sound, clickHandler} : Props) {
     // states passed from parent
     const isDisabled = states[0];
     const isLoading = states[2]
@@ -32,6 +33,7 @@ export default function Board( {size, activeSquare, knightColour, states, moves,
     function handleClick(pos: Array<number>) {
         if(!isDisabled) {
             clickHandler(pos);
+            sound.play();
         }
     }
 

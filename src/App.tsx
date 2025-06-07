@@ -16,7 +16,14 @@ function App() {
   const [moveMap, setMoveMap] = useState(new Map());
 
   const appStates = [isRunning, isFinished, isLoading];
+  const moveSound = new Audio("/src/assets/chess-move.mp3");
+  moveSound.preload = "auto";
 
+  // function playSound() plays sound effect of piece moving
+  function playSound(sound: HTMLAudioElement) {
+    const clone = sound.cloneNode();
+    (clone as HTMLAudioElement).play();
+  }
 
   // fetchAPI() retrieves result of api call to main.py,
   // returns list of moves to solve knight's tour or [[-1]]
@@ -32,8 +39,6 @@ function App() {
         alert("Error Fetching data\n" + error);
         setIsRunning(false);
     }
-    
-    
   }
 
   // sleep(ms) pauses for a specified number of ms
@@ -64,7 +69,10 @@ function App() {
         const c = coord[1];
         const ID = "row " + r + " col " + c;
 
-        // update active square and add to map
+        // update active square, add to map, play sound effect
+        if(delay >= 30) { 
+          playSound(moveSound); 
+        }
         setActiveSquare(coord);
         setMoveMap(moveMap.set(ID, i+1));
 
@@ -110,7 +118,7 @@ function App() {
         <ActionBox states={appStates} activeSquare={activeSquare} numberChangers={changeHandlers} optionChanger={setColour} clickHandlers={clickHandlers}></ActionBox>
         <div className="right-panel">
             {isLoading ? <div className="loader"></div> : null}
-            <Board size={size} activeSquare={activeSquare} knightColour={colour} states={appStates} moves={moveMap} clickHandler={setActiveSquare}/>
+            <Board size={size} activeSquare={activeSquare} knightColour={colour} states={appStates} moves={moveMap} sound={moveSound} clickHandler={setActiveSquare}/>
         </div>
     </div>
   </>);
