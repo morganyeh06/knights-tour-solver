@@ -25,9 +25,8 @@ export default function ThemeSwitch() {
         <div className="theme-toggle">
             <input type="checkbox" id="theme-switch" checked={isDark} onChange={handleChange}></input>
             <label htmlFor="theme-switch">
-                <img src={isDark ? Moon : Sun} alt={isDark ? "moon" : "sun"} id="theme-img"></img>
+                <img src={isDark ? Moon : Sun} alt={isDark ? "moon" : "sun"} className="toggle-img" title="Toggle Light/Dark Mode"></img>
             </label>
-        </div>
-        
+        </div> 
     </>)
 };

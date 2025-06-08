@@ -48,23 +48,34 @@
   font-size: 20px;
 }
 
+/* -------------------------------- ThemeSwitch & SoundToggle--------------------------------------------- */
 
-
-/* ------------------------------------- ThemeSwitch --------------------------------------------- */
-
-.theme-toggle {
+.toggles {
   margin-left: auto; 
+  margin-right: 10px;
+  display: flex;
+}
+
+.sound-toggle {
   margin-right: 10px;
 }
 
-#theme-switch {
+.theme-toggle {
+  margin-left: 10px;
+}
+
+#theme-switch, #sound-switch {
   display: none;
 }
 
-#theme-img {
+.toggle-img {
   position: relative;
   width: 28px;
   height: 28px;
+}
+
+.toggle-img:hover {
+  cursor: pointer;
 }
 
 /* ------------------------------------- ActionBox --------------------------------------------- */

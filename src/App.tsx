@@ -6,14 +6,19 @@ import ActionBox from './components/ActionBox'
 import Board from './components/Board'
 
 function App() {
+  // ActionBox states
   const [size, setSize] = useState(8);
   const [delay, setDelay] = useState(200);
   const [colour, setColour] = useState("White");
+  // Board state and move list
   const [activeSquare, setActiveSquare] = useState([-1, -1]);
+  const [moveMap, setMoveMap] = useState(new Map());
+  // global run states
   const [isRunning, setIsRunning] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [moveMap, setMoveMap] = useState(new Map());
+  // toggle states
+  const [isSoundOn, setIsSoundOn] = useState(true);
 
   const appStates = [isRunning, isFinished, isLoading];
   const moveSound = new Audio("/src/assets/chess-move.mp3");
@@ -73,7 +78,7 @@ function App() {
         const ID = "row " + r + " col " + c;
 
         // update active square, add to map, play sound effect
-        if(delay >= 30) { playSound(moveSound); }
+        if(isSoundOn && delay >= 30) { playSound(moveSound); }
         setActiveSquare(coord);
         setMoveMap(moveMap.set(ID, i+1));
 
@@ -110,16 +115,21 @@ function App() {
     }
   }
 
+  // toggleSound() turns on/off sound in the app
+  function toggleSound() {
+    setIsSoundOn(!isSoundOn);
+  }
+
   const changeHandlers = [handleSizeChange, setDelay];
   const clickHandlers = [solveTour, clearBoard];
 
   return (<>
-    <Banner/>
+    <Banner isSoundOn={isSoundOn} toggleFunction={toggleSound}/>
     <div className="body">
         <ActionBox states={appStates} activeSquare={activeSquare} numberChangers={changeHandlers} optionChanger={setColour} clickHandlers={clickHandlers}></ActionBox>
         <div className="right-panel">
             {isLoading ? <div className="loader"></div> : null}
-            <Board size={size} activeSquare={activeSquare} knightColour={colour} states={appStates} moves={moveMap} sound={moveSound} clickHandler={setActiveSquare}/>
+            <Board size={size} activeSquare={activeSquare} knightColour={colour} states={appStates} moves={moveMap} isSoundOn={isSoundOn} sound={moveSound} clickHandler={setActiveSquare}/>
         </div>
     </div>
   </>);
