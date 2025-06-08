@@ -4,6 +4,7 @@
 
 #root {
   margin: 0 auto;
+  height: 100%;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 500;
@@ -30,7 +31,7 @@
 .header {
   width: 100%;
   min-width: 400px;
-  padding: 10px;
+  padding: 15px;
 
   color: white;
   background: #3d85c6;
@@ -42,26 +43,28 @@
 #title {
   margin-top: auto;
   margin-bottom: auto;
-  margin-left: 5px;
+  margin-left: 10px;
 
   font-size: 20px;
 }
 
-.switch {
-  margin-left: auto; 
-  margin-right: 5px;
-}
+
 
 /* ------------------------------------- ThemeSwitch --------------------------------------------- */
 
-#root .btn-check + .btn-outline-primary {
-  background-color: white;
-  color: #0d6efd;
+.theme-toggle {
+  margin-left: auto; 
+  margin-right: 10px;
 }
 
-#root .btn-check:checked + .btn-outline-primary {
-  background-color: #0d6efd;
-  color: white;
+#theme-switch {
+  display: none;
+}
+
+#theme-img {
+  position: relative;
+  width: 28px;
+  height: 28px;
 }
 
 /* ------------------------------------- ActionBox --------------------------------------------- */

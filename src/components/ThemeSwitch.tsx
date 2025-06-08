@@ -1,23 +1,33 @@
 import '/src/App.css';
+import { useState, useEffect } from 'react';
+import Sun from "/src/assets/sun.svg";
+import Moon from "/src/assets/moon.svg";
 
 export default function ThemeSwitch() {
+    const [isDark, setIsDark] = useState(false);
 
-    // element-specfic styles for light and dark labels
-    const lightStyle = {
-        borderTopRightRadius: 0,
-        borderBottomRightRadius: 0
+    function handleChange() {
+        setIsDark(!isDark);
     }
 
-    const darkStyle = {
-        borderTopLeftRadius: 0,
-        borderBottomLeftRadius: 0
-    }
+    useEffect(() => {
+        // css classes to toggle dark mode
+        
+
+        if (isDark) {
+            document.body.classList.add('dark');
+        } else {
+            document.body.classList.remove('dark');
+        }
+        }, [isDark]);
 
     return (<>
-        <input type="radio" className="btn-check" name="options" id="light" defaultChecked></input>
-        <label className="btn btn-outline-primary" htmlFor="light" style={lightStyle}>Light</label>
-
-        <input type="radio" className="btn-check" name="options" id="dark"></input>
-        <label className="btn btn-outline-primary" htmlFor="dark" style={darkStyle}>Dark</label>
+        <div className="theme-toggle">
+            <input type="checkbox" id="theme-switch" checked={isDark} onChange={handleChange}></input>
+            <label htmlFor="theme-switch">
+                <img src={isDark ? Moon : Sun} alt={isDark ? "moon" : "sun"} id="theme-img"></img>
+            </label>
+        </div>
+        
     </>)
 };

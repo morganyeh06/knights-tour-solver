@@ -32,6 +32,7 @@ function App() {
     const url = "http://127.0.0.1:8080/?size=" + size 
                   + "&row=" + activeSquare[0] + "&col=" + activeSquare[1];
 
+    // attempt to fetch data, display error message if failed
     try {
       const response = await axios.get(url);
       return response.data.moves;
@@ -44,9 +45,10 @@ function App() {
   // sleep(ms) pauses for a specified number of ms
   function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
+  }
 
-  // solveTour() performs Knights Tour solving and animation when button is clicked
+  // solveTour() performs Knights Tour solving and 
+  // displays result when button is clicked
   async function solveTour() {
     setIsRunning(true);
     setIsLoading(true);
@@ -58,6 +60,7 @@ function App() {
     // check if a solution was found
     if(moveList.length === 1 && moveList[0][0] === -1) {
       setIsRunning(false);
+      await sleep(100);
       alert("No solution found. Please choose a different starting position or board size.");
     } else {
       const len = moveList.length;
@@ -70,9 +73,7 @@ function App() {
         const ID = "row " + r + " col " + c;
 
         // update active square, add to map, play sound effect
-        if(delay >= 30) { 
-          playSound(moveSound); 
-        }
+        if(delay >= 30) { playSound(moveSound); }
         setActiveSquare(coord);
         setMoveMap(moveMap.set(ID, i+1));
 
