@@ -15,9 +15,10 @@ export default function ThemeSwitch() {
         
 
         if (isDark) {
-            document.body.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            
         } else {
-            document.body.classList.remove('dark');
+            document.documentElement.setAttribute('data-theme', 'light');
         }
         }, [isDark]);
 

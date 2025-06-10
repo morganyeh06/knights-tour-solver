@@ -1,5 +1,20 @@
 :root {
-  background-color: #f3f3f3;
+  --bg-colour: #f3f3f3;
+  --primary-colour: #3d85c6;
+  --secondary-colour: #93c47d;
+  --tertiary-colour: #E34234;
+
+  background-color: var(--bg-colour);
+}
+
+* {
+  transition: background 1s;
+}
+
+[data-theme="dark"] {
+    --bg-colour: #121212;
+    --primary-colour: #404040;
+    --secondary-colour: #282828;
 }
 
 #root {
@@ -11,7 +26,7 @@
   text-align: center;
 
   color-scheme: light dark;
-  background-color: 	#f3f3f3;
+  background-color: 	var(--bg-colour);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -34,7 +49,7 @@
   padding: 15px;
 
   color: white;
-  background: #3d85c6;
+  background: var(--primary-colour);
   
   display: flex;
   align-items: center;
@@ -88,9 +103,8 @@
   width: 350px;
   min-width: 350px;
 
-  background-color: #93c47d;
+  background-color: var(--secondary-colour);
   border-radius: 20px;
-  border: 1px solid #93c47d;
 }
 
 #instructions {
@@ -197,17 +211,20 @@ select:hover {
 }
 
 #solve-button {
-  background-color: #3d85c6;
+  background-color: var(--primary-colour);
 }
 
 #reset-button {
-  background-color: #E34234;
+  background-color: var(--tertiary-colour);
 }
 
 #reset-button span:after {
   content: '\21ba';
 }
 
+[data-theme="dark"] .disabled {
+  opacity: 0.38;
+}
 
 .disabled {
   text-align: center;
@@ -216,7 +233,7 @@ select:hover {
   width: 200px;
 
   border-radius: 8px;
-  background-color: #3d85c6;
+  background-color: var(--primary-colour);
   border: none;
 
   color: white;
@@ -245,7 +262,7 @@ select:hover {
 
   /* create spinner */
   border: 16px solid #f3f3f3; 
-  border-top: 16px solid #3d85c6; 
+  border-top: 16px solid var(--primary-colour); 
   border-radius: 50%;
   width: 120px;
   height: 120px;
