@@ -2,7 +2,7 @@
   --bg-colour: #f3f3f3;
   --primary-colour: #3d85c6;
   --secondary-colour: #93c47d;
-  --tertiary-colour: #E34234;
+  --tertiary-colour: #B22222;
 
   background-color: var(--bg-colour);
 }
@@ -15,6 +15,7 @@
     --bg-colour: #121212;
     --primary-colour: #404040;
     --secondary-colour: #282828;
+    --tertiary-colour: #9A2A2A;
 }
 
 #root {
