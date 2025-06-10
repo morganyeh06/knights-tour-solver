@@ -18,7 +18,10 @@ function App() {
   const [isFinished, setIsFinished] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   // toggle states
-  const [isSoundOn, setIsSoundOn] = useState(true);
+  const [soundStatus, setSoundStatus] = useState(() => {
+    const status = localStorage.getItem("sound status");
+    return status ? status : "on";
+  });
 
   const appStates = [isRunning, isFinished, isLoading];
   const moveSound = new Audio("/src/assets/chess-move.mp3");
@@ -78,7 +81,7 @@ function App() {
         const ID = "row " + r + " col " + c;
 
         // update active square, add to map, play sound effect
-        if(isSoundOn && delay >= 30) { playSound(moveSound); }
+        if(soundStatus === "on" && delay >= 30) { playSound(moveSound); }
         setActiveSquare(coord);
         setMoveMap(moveMap.set(ID, i+1));
 
@@ -117,19 +120,28 @@ function App() {
 
   // toggleSound() turns on/off sound in the app
   function toggleSound() {
-    setIsSoundOn(!isSoundOn);
+    var status = "";
+
+    if(soundStatus === "on") {
+      status = "off";
+    } else {
+      status = "on";
+    }
+
+    localStorage.setItem("sound status", status);
+    setSoundStatus(status);
   }
 
   const changeHandlers = [handleSizeChange, setDelay];
   const clickHandlers = [solveTour, clearBoard];
 
   return (<>
-    <Banner isSoundOn={isSoundOn} toggleFunction={toggleSound}/>
+    <Banner isSoundOn={soundStatus === "on" ? true : false} toggleFunction={toggleSound}/>
     <div className="body">
         <ActionBox states={appStates} activeSquare={activeSquare} numberChangers={changeHandlers} optionChanger={setColour} clickHandlers={clickHandlers}></ActionBox>
         <div className="right-panel">
             {isLoading ? <div className="loader"></div> : null}
-            <Board size={size} activeSquare={activeSquare} knightColour={colour} states={appStates} moves={moveMap} isSoundOn={isSoundOn} sound={moveSound} clickHandler={setActiveSquare}/>
+            <Board size={size} activeSquare={activeSquare} knightColour={colour} states={appStates} moves={moveMap} isSoundOn={soundStatus === "on" ? true : false} sound={moveSound} clickHandler={setActiveSquare}/>
         </div>
     </div>
   </>);
