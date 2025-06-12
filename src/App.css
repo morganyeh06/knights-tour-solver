@@ -97,7 +97,7 @@
 /* ------------------------------------- ActionBox --------------------------------------------- */
 
 .box {
-  margin-left: 50px;
+  margin-left: 4%;
 
   height: 100%;
   min-height: 450px;
@@ -363,3 +363,67 @@ img {
 
   font-size: 18px;
 }
+
+
+/* ---------------------------- Styles for Mobile -------------------------------- */
+
+@media screen and (max-width: 800px) {
+
+  .body {
+    display: block;
+  }
+
+  .settings {
+    width: 46%;
+    float: left;
+    margin-left: 2%;
+    margin-top: 0px;
+  }
+
+  .input-label {
+    font-size: 2.7vw;
+  }
+
+  .field-row {
+    width: 95%;
+  }
+
+  .input-field {
+    margin-right: 0px;
+  }
+
+  .box {
+    margin-left: auto;
+    width: 100%;
+    min-height: 150px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #instructions {
+    font-size: 2.5vw;
+    width: 80%;
+    margin-top: auto;
+  }
+
+  #solve-button, #reset-button {
+    margin-top: auto;
+    font-size: 4vw;
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 132px;
+    float: right;
+    margin-right: 2%;
+  }
+
+  .right-panel {
+    margin-top: 5%;
+  }
+
+} 

@@ -31,8 +31,13 @@ export default function ActionBox({states,  activeSquare,  numberChangers, click
                 <Dropdown name="colors" id="knight-color" text="Knight Colour" options={knights} optionChanger={optionChanger} isDisabled={isDisabled}/>
             </div>
             
-            <h2 id="instructions">Select a Starting Position on the Board</h2>
-            {isFinished ? <Button text="Clear" id="reset-button" isDisabled={false} clickHandler={reset}/>
-                         : <Button text={isDisabled ? "Running" : "Solve"} id="solve-button" isDisabled={buttonDisabled} clickHandler={start}/>}
+            <div className="bottom">
+                <div className="bottom-container">
+                    <h2 id="instructions">Select a Starting Position on the Board</h2>
+                {isFinished ? <Button text="Clear" id="reset-button" isDisabled={false} clickHandler={reset}/>
+                            : <Button text={isDisabled ? "Running" : "Solve"} id="solve-button" isDisabled={buttonDisabled} clickHandler={start}/>}
+                </div>
+                
+            </div>
         </div></>)
 }
