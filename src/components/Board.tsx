@@ -43,7 +43,7 @@ export default function Board( {size, activeSquare, knightColour, states, moves,
         let arr = [];
 
         for(let i = 0; i < size; i++) {
-            let row = [];
+            let col = [];
             for(let j = 0; j < size; j++) {
                 // determine colour of square
                 var colour = ((i + j) % 2 == 0) ? light : dark;
@@ -55,13 +55,13 @@ export default function Board( {size, activeSquare, knightColour, states, moves,
 
                 // create square, display image if square is selected
                 // display move number in square if part of moves
-                row.push(<div key={coordKey} id={coordKey} className={classes} style={colour} onClick={() => handleClick(coord)}>
+                col.push(<div key={coordKey} id={coordKey} className={classes} style={colour} onClick={() => handleClick(coord)}>
                             {isActive ? <img src={knightColour === "White" ? WhiteKnight : BlackKnight} alt="knight"/> : null}
                             {moves.has(coordKey) ? <p className="number" style={textColour}>{moves.get(coordKey)}</p> : null}
                         </div>);
             }
 
-            arr.push(<div key={i}>{row}</div>);
+            arr.push(<div className="board-col" key={i}>{col}</div>);
         }
 
         return arr;
