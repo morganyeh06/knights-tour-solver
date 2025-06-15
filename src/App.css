@@ -100,9 +100,7 @@
   margin-left: 4%;
 
   height: 100%;
-  min-height: 450px;
   width: 350px;
-  min-width: 350px;
 
   background-color: var(--secondary-colour);
   border-radius: 20px;
@@ -390,6 +388,7 @@ img {
 
   .input-field {
     margin-right: 0px;
+    
   }
 
   .box {
@@ -424,8 +423,8 @@ img {
 
   .right-panel {
     margin-top: 5%;
-    margin-left: 2%;
-    margin-right: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
     margin-bottom: 5%;
   }
 
