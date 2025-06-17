@@ -164,6 +164,10 @@ select:hover {
   width: 100px;
 }
 
+.input-disabled:hover {
+  cursor: not-allowed;
+}
+
 /* ---------------------------------------------- Button ------------------------------------------------------- */
 
 .button {
@@ -241,7 +245,7 @@ select:hover {
   font-weight: 500;
 
   opacity: 0.6;
-  cursor: default;
+  cursor: not-allowed;
 }
 
 /* ---------------------------------------------- Board ------------------------------------------------------- */

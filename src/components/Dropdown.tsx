@@ -12,6 +12,7 @@ interface Props {
 export default function Dropdown({name, id, text, options, isDisabled, optionChanger} : Props) {
     const dropdownOptions = options.map((opt) => (<option key={opt}>{opt}</option>));
 
+    // handleChange() updates App states when selected dropdown option changes
     function handleChange() {
         var dropdown = document.getElementById(id) as HTMLSelectElement;
         var index = dropdown!.selectedIndex;
@@ -23,7 +24,8 @@ export default function Dropdown({name, id, text, options, isDisabled, optionCha
     return (<>
         <div className="field-row">
             <label className="input-label" htmlFor={id}>{text}</label>
-            <select name={name} className="form-select input-field" id={id} onChange={handleChange} disabled={isDisabled}>
+            <select name={name} className="form-select input-field" id={id} 
+                    onChange={handleChange} disabled={isDisabled}>
                 {dropdownOptions}
             </select>
         </div>

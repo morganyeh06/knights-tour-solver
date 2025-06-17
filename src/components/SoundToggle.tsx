@@ -13,7 +13,8 @@ export default function SoundToggle({isSoundOn, handleChange} : Props) {
         <div className="sound-toggle">
             <input type="checkbox" id="sound-switch" checked={isSoundOn} onChange={handleChange}></input>
             <label htmlFor="sound-switch">
-                <img title="Toggle Sound" src={isSoundOn ? On : Off} alt={isSoundOn ? "sound on" : "sound off"} className="toggle-img"></img>
+                <img title="Toggle Sound" src={isSoundOn ? On : Off} 
+                     alt={isSoundOn ? "sound on" : "sound off"} className="toggle-img"></img>
             </label>
         </div> 
     </>)

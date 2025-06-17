@@ -20,22 +20,27 @@ export default function ActionBox({states,  activeSquare,  numberChangers, click
     const handleSizeChange = numberChangers[0];
     const handleDelayChange = numberChangers[1];
 
+    // constants to pass to children
     const knights = ["White", "Black"];
-    const buttonDisabled = (activeSquare[0] === -1 && activeSquare[1] === -1 || isDisabled) ? true : false;
+    const buttonDisabled = (activeSquare[0] === -1 && activeSquare[1] === -1 || isDisabled);
 
     return (<>
         <div className="box">
             <div className="settings">
-                <NumInput id="size" minVal={5} maxVal={12} defaultVal={8} text="Board Size (nxn)" changeHandler={handleSizeChange} isDisabled={isDisabled}/>
-                <NumInput id="delay" minVal={0} maxVal={1000} defaultVal={200} text="Move Delay (ms)" changeHandler={handleDelayChange} isDisabled={isDisabled}/>
-                <Dropdown name="colors" id="knight-color" text="Knight Colour" options={knights} optionChanger={optionChanger} isDisabled={isDisabled}/>
+                <NumInput id="size" minVal={5} maxVal={12} defaultVal={8} text="Board Size (nxn)" 
+                                    changeHandler={handleSizeChange} isDisabled={isDisabled}/>
+                <NumInput id="delay" minVal={0} maxVal={1000} defaultVal={200} text="Move Delay (ms)" 
+                                    changeHandler={handleDelayChange} isDisabled={isDisabled}/>
+                <Dropdown name="colors" id="knight-color" text="Knight Colour" options={knights} 
+                                    optionChanger={optionChanger} isDisabled={isDisabled}/>
             </div>
             
             <div className="bottom">
                 <div className="bottom-container">
                     <h2 id="instructions">Select a Starting Position on the Board</h2>
                 {isFinished ? <Button text="Clear" id="reset-button" isDisabled={false} clickHandler={reset}/>
-                            : <Button text={isDisabled ? "Running" : "Solve"} id="solve-button" isDisabled={buttonDisabled} clickHandler={start}/>}
+                            : <Button text={isDisabled ? "Running" : "Solve"} id="solve-button" 
+                                      isDisabled={buttonDisabled} clickHandler={start}/>}
                 </div>
                 
             </div>

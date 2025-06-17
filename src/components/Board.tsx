@@ -13,13 +13,15 @@ interface Props {
     clickHandler: (pos: Array<number>) => void;
 }
 
-export default function Board( {size, activeSquare, knightColour, states, moves, isSoundOn, sound, clickHandler} : Props) {
+export default function Board( {size, activeSquare, knightColour, states, 
+                                moves, isSoundOn, sound, clickHandler} : Props) {
     // states passed from parent
     const isDisabled = states[0];
     const isLoading = states[2]
     
     // CSS classes and styles
-    var classes = isDisabled ? "square size-" + size : "square size-" + size + " is-active";
+    var classes = isDisabled ? "square size-" + size 
+                             : "square size-" + size + " is-active";
     const light = {backgroundColor: "#eeeed2"};
     const dark = {backgroundColor: "#769656" };
     const lightText = {color: "#eeeed2"};
@@ -49,6 +51,7 @@ export default function Board( {size, activeSquare, knightColour, states, moves,
                 var colour = ((i + j) % 2 == 0) ? light : dark;
                 var textColour = ((i + j) % 2 == 0) ? darkText : lightText;
 
+                // properties of square
                 const coordKey = "row " + j + " col " + i;
                 const coord = [j, i];
                 const isActive = activeSquare[0] === j && activeSquare[1] == i;
@@ -61,6 +64,7 @@ export default function Board( {size, activeSquare, knightColour, states, moves,
                         </div>);
             }
 
+            // add element to array
             arr.push(<div className="board-col" key={i}>{col}</div>);
         }
 

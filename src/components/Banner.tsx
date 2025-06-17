@@ -17,5 +17,5 @@ export default function Banner( {isSoundOn, toggleFunction} : Props) {
             </div>
             
         </div>
-    </>)
+    </>);
 };

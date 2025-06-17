@@ -10,13 +10,16 @@ function App() {
   const [size, setSize] = useState(8);
   const [delay, setDelay] = useState(200);
   const [colour, setColour] = useState("White");
+
   // Board state and move list
   const [activeSquare, setActiveSquare] = useState([-1, -1]);
   const [moveMap, setMoveMap] = useState(new Map());
+
   // global run states
   const [isRunning, setIsRunning] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   // toggle states
   const [soundStatus, setSoundStatus] = useState(() => {
     const status = localStorage.getItem("sound status");
@@ -27,11 +30,13 @@ function App() {
   const moveSound = new Audio("/src/assets/chess-move.mp3");
   moveSound.preload = "auto";
 
+
   // function playSound() plays sound effect of piece moving
   function playSound(sound: HTMLAudioElement) {
     const clone = sound.cloneNode();
     (clone as HTMLAudioElement).play();
   }
+
 
   // fetchAPI() retrieves result of api call to main.py,
   // returns list of moves to solve knight's tour or [[-1]]
@@ -50,10 +55,12 @@ function App() {
     }
   }
 
+
   // sleep(ms) pauses for a specified number of ms
   function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
 
   // solveTour() performs Knights Tour solving and 
   // displays result when button is clicked
@@ -62,14 +69,17 @@ function App() {
     setIsLoading(true);
     await sleep(500);
 
+    // get solution from main.py
     const moveList = await fetchAPI();
     setIsLoading(false);
 
     // check if a solution was found
     if(moveList.length === 1 && moveList[0][0] === -1) {
+      // stop running and display error message
       setIsRunning(false);
       await sleep(100);
       alert("No solution found. Please choose a different starting position or board size.");
+
     } else {
       const len = moveList.length;
 
@@ -97,6 +107,7 @@ function App() {
     
   }
 
+
   // clearBoard() removes knight and numbers from board,
   // re-enables input fields in ActionBox
   function clearBoard() {
@@ -106,6 +117,7 @@ function App() {
     setIsRunning(false);
     setIsFinished(false);
   }
+
 
   // handleSizeChange(num) sets size to num and
   // sets startSquare to [-1, -1] if it is out of bounds
@@ -118,30 +130,31 @@ function App() {
     }
   }
 
+
   // toggleSound() turns on/off sound in the app
   function toggleSound() {
-    var status = "";
-
-    if(soundStatus === "on") {
-      status = "off";
-    } else {
-      status = "on";
-    }
+    var status = (soundStatus === "on") ? "off" : "on";
 
     localStorage.setItem("sound status", status);
     setSoundStatus(status);
   }
 
+
+  // functions to pass to child components
   const changeHandlers = [handleSizeChange, setDelay];
   const clickHandlers = [solveTour, clearBoard];
+  
 
   return (<>
     <Banner isSoundOn={soundStatus === "on" ? true : false} toggleFunction={toggleSound}/>
     <div className="body">
-        <ActionBox states={appStates} activeSquare={activeSquare} numberChangers={changeHandlers} optionChanger={setColour} clickHandlers={clickHandlers}></ActionBox>
+        <ActionBox states={appStates} activeSquare={activeSquare} numberChangers={changeHandlers} 
+                   optionChanger={setColour} clickHandlers={clickHandlers}></ActionBox>
         <div className="right-panel">
             {isLoading ? <div className="loader"></div> : null}
-            <Board size={size} activeSquare={activeSquare} knightColour={colour} states={appStates} moves={moveMap} isSoundOn={soundStatus === "on" ? true : false} sound={moveSound} clickHandler={setActiveSquare}/>
+            <Board size={size} activeSquare={activeSquare} knightColour={colour} states={appStates} 
+                   moves={moveMap} isSoundOn={soundStatus === "on" ? true : false} 
+                   sound={moveSound} clickHandler={setActiveSquare}/>
         </div>
     </div>
   </>);

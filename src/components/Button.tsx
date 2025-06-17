@@ -8,7 +8,9 @@ interface Props {
 }
 
 export default function Button({text, id, isDisabled, clickHandler} : Props) {
+    // CSS classes for styling
     const classes = isDisabled ? "disabled" : "button";
 
-    return <button type="button" className={classes} id={id} disabled={isDisabled} onClick={clickHandler}><span>{text} </span></button>
+    return (<button type="button" className={classes} id={id} disabled={isDisabled} 
+                    onClick={clickHandler}><span>{text} </span></button>);
 };
