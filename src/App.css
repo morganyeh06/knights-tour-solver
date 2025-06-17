@@ -152,6 +152,10 @@ select:hover {
   cursor: pointer;
 }
 
+select:disabled:hover {
+  cursor: not-allowed;
+}
+
 #size {
   width: 100px;
 }

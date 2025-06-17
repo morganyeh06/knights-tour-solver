@@ -10,7 +10,10 @@ interface Props {
 }
 
 export default function Dropdown({name, id, text, options, isDisabled, optionChanger} : Props) {
+    // select options and CSS classes for styling
     const dropdownOptions = options.map((opt) => (<option key={opt}>{opt}</option>));
+    const classes = isDisabled ? "form-select input-field .input-disabled" 
+                               : "form-select input-field";
 
     // handleChange() updates App states when selected dropdown option changes
     function handleChange() {
@@ -24,7 +27,7 @@ export default function Dropdown({name, id, text, options, isDisabled, optionCha
     return (<>
         <div className="field-row">
             <label className="input-label" htmlFor={id}>{text}</label>
-            <select name={name} className="form-select input-field" id={id} 
+            <select name={name} className={classes} id={id} 
                     onChange={handleChange} disabled={isDisabled}>
                 {dropdownOptions}
             </select>
