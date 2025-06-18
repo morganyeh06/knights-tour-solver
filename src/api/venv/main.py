@@ -14,7 +14,7 @@ KNIGHT_MOVES = [
 
 app = Flask(__name__)
 cors = CORS(app, origins='*')
-@app.route("/", methods=["GET"])
+@app.route("/solve", methods=["GET"])
 
 
 # getMoveListJSON() returns list of moves

@@ -42,7 +42,7 @@ function App() {
   // returns list of moves to solve knight's tour or [[-1]]
   // if there is no solution found
   async function fetchAPI() {
-    const url = "http://127.0.0.1:8080/?size=" + size 
+    const url = "http://127.0.0.1:8080/solve?size=" + size 
                   + "&row=" + activeSquare[0] + "&col=" + activeSquare[1];
 
     // attempt to fetch data, display error message if failed
