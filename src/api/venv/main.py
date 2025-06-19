@@ -170,4 +170,4 @@ if __name__ == "__main__":
     #app.run(debug=False, port=8080)
 
     # Production Server (using waitress)
-    serve(app, host="127.0.0.1", port=8080)
+    serve(app, port=8080)
