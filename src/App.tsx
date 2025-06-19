@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from "axios"
 import './App.css'
 import Banner from './components/Banner'
@@ -27,15 +27,20 @@ function App() {
   });
 
   const appStates = [isRunning, isFinished, isLoading];
-  const moveSound = new Audio("/src/assets/chess-move.mp3");
+  const moveSound = new Audio("/chess-move.mp3");
   moveSound.preload = "auto";
 
 
-  // function playSound() plays sound effect of piece moving
-  function playSound(sound: HTMLAudioElement) {
-    const clone = sound.cloneNode();
-    (clone as HTMLAudioElement).play();
-  }
+  useEffect(() => {
+
+    // serve front end via api call, display error if failed
+    try {
+      fetch("http://127.0.0.1:8080");
+    } catch(error) {
+      alert('Error fetching data\n ' + error);
+    }
+
+  }, []);
 
 
   // fetchAPI() retrieves result of api call to main.py,
@@ -53,6 +58,13 @@ function App() {
         alert("Error Fetching data\n" + error);
         setIsRunning(false);
     }
+  }
+
+
+  // function playSound() plays sound effect of piece moving
+  function playSound(sound: HTMLAudioElement) {
+    const clone = sound.cloneNode();
+    (clone as HTMLAudioElement).play();
   }
 
 

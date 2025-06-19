@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from waitress import serve
 import logging
@@ -12,14 +12,19 @@ KNIGHT_MOVES = [
         (-2, -1), (-1, -2), (1, -2), (2, -1)
     ]
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="../../../dist", static_url_path="/")
 cors = CORS(app, origins='*')
-@app.route("/solve", methods=["GET"])
+
+# home() serves the front end of the application
+@app.route("/")
+def home():
+    return send_from_directory(app.static_folder, "index.html")
 
 
 # getMoveListJSON() returns list of moves
 # needed to solve Knights Tour in JSON format,
 # returns [[-1]] in JSON is not solution is found
+@app.route("/solve", methods=["GET"])
 def getMoveListJSON():
     # parameters from front end
     boardSize = int(request.args.get('size'))
