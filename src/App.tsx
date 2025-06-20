@@ -47,7 +47,7 @@ function App() {
   // returns list of moves to solve knight's tour or [[-1]]
   // if there is no solution found
   async function fetchAPI() {
-    const url = "https://knights-tour-solver.onrender.com?size=" + size 
+    const url = "https://knights-tour-solver.onrender.com/solve?size=" + size 
                   + "&row=" + activeSquare[0] + "&col=" + activeSquare[1];
 
     // attempt to fetch data, display error message if failed
