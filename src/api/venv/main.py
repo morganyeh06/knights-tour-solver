@@ -167,7 +167,7 @@ def getMoveList(n, res):
 
 if __name__ == "__main__":
     # Development Server
-    app.run(debug=False, port=8080)
+    app.run(host='0.0.0.0')
 
     # Production Server (using waitress)
     # serve(app, host="0.0.0.0", port=80)
