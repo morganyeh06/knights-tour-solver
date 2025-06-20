@@ -35,7 +35,7 @@ function App() {
 
     // serve front end via api call, display error if failed
     try {
-      fetch("http://0.0.0.0:10000");
+      fetch("http://0.0.0.0:80");
     } catch(error) {
       alert('Error fetching data\n ' + error);
     }
@@ -47,7 +47,7 @@ function App() {
   // returns list of moves to solve knight's tour or [[-1]]
   // if there is no solution found
   async function fetchAPI() {
-    const url = "http://0.0.0.0:10000/solve?size=" + size 
+    const url = "http://0.0.0.0:80/solve?size=" + size 
                   + "&row=" + activeSquare[0] + "&col=" + activeSquare[1];
 
     // attempt to fetch data, display error message if failed
@@ -55,7 +55,7 @@ function App() {
       const response = await axios.get(url);
       return response.data.moves;
     } catch(error) {
-        alert("Error Fetching data\n" + error);
+        alert("Error Fetching Move Data\n" + error);
         setIsRunning(false);
     }
   }
