@@ -1,5 +1,5 @@
 # Knight's Tour Solver 
-A web application for visualizing solutions to the knight's tour problem on NxN boards, using Warnsdorff's Rule to find solutions.
+A web application for visualizing solutions to the knight's tour problem on nxn boards, using Warnsdorff's Rule to find solutions.
 
 **Link:** https://knights-tour-solver.onrender.com/
 
@@ -10,7 +10,7 @@ A web application for visualizing solutions to the knight's tour problem on NxN 
 * Flask
 
 # The Knight's Tour Problem and Warnsdorff's Rule
-A [Knight's Tour](https://en.wikipedia.org/wiki/Knight%27s_tour) is a sequence of moves on a chessboard such that the knight piece visits every space exactly once. The knight's tour problem is the mathematical problem that involves finding possible knight's tours on an 8x8 chessboard. Variations of the problem include different NxN board sizes, as well as non-square (NxM) boards.
+A [Knight's Tour](https://en.wikipedia.org/wiki/Knight%27s_tour) is a sequence of moves on a chessboard such that the knight piece visits every space exactly once. The knight's tour problem is the mathematical problem that involves finding possible knight's tours on an 8x8 chessboard. Variations of the problem include different nxn board sizes, as well as non-square (nxm) boards.
 
 [Warnsdorff's Rule](https://en.wikipedia.org/wiki/Knight%27s_tour#Warnsdorf.27s_rule) is a heuristic used to find a single knight's tour on a chessboard of arbitrary size. 
 The rule states that the knight should always advance to the square with the fewest possible moves from that position. In the case where multiple squares have the same number of following moves, various methods can be used to break the tie. Warnsdorff's Rule greatly decreases the number of backtracking attempts needed to solve the knight's tour problem and drastically improves efficiency.
@@ -26,8 +26,8 @@ In the event that a solution is not found, please choose a different square or b
 
 ## Settings
 Various settings can be configured prior to starting a knight's tour:
-- Board Size - NxN boards only
-- Move Delay - the amount of time to pause in between moves
+- Board Size - the number of rows and columns (eg. n=8 is 8x8)
+- Move Delay - the amount of time to pause in between moves in milliseconds
 - Knight Colour - White or Black
 
 
