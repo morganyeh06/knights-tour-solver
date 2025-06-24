@@ -26,8 +26,10 @@ In the event that a solution is not found, please choose a different square or b
 
 ## Settings
 Various settings can be configured prior to starting a knight's tour:
-- Board Size - the number of rows and columns (eg. n=8 is 8x8)
+- Board Size - the number of rows and columns (square boards only)
 - Move Delay - the amount of time to pause in between moves in milliseconds
 - Knight Colour - White or Black
 
-
+The following settings can be toggled in the top right corner of the application, and will be remembered for future visits to the page:
+- Sound (On/Off)
+- Theme (Light/Dark)
