@@ -3,10 +3,10 @@ A web application for visualizing solutions to the knight's tour problem on nxn 
 
 **Link:** https://knights-tour-solver.onrender.com/
 
-# Built With
-* React.js
+## Built With
+* React
 * Vite
-* Bootstrap.css
+* Bootstrap
 * Flask
 
 # The Knight's Tour Problem and Warnsdorff's Rule
