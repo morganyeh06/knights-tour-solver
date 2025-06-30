@@ -18,9 +18,9 @@ The rule states that the knight should always advance to the square with the few
 **Sources:** [Wikipedia](https://en.wikipedia.org/wiki/Knight%27s_tour), [GeeksforGeeks](https://www.geeksforgeeks.org/dsa/the-knights-tour-problem/)
 
 ## Usage
-1. Select a square on the chessboard and click "Solve" to search for a solution.
+1. Select a square on the chessboard and click _Solve_ to search for a solution.
 2. If found, a knight's tour will be performed on the board, otherwise an error message will be displayed.
-3. Click "Clear" to reset the board after the tour is complete.
+3. Click _Clear_ to reset the board after the tour is complete.
 
 In the event that a solution is not found, please choose a different square or board size and try again.
 
