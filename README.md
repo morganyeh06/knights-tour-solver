@@ -2,6 +2,7 @@
 A web application for visualizing solutions to the knight's tour problem on nxn boards, using Warnsdorff's Rule to find solutions.
 
 **Link:** https://knights-tour-solver.onrender.com/
+Note: The server winds down with inactivity, so it may take up to 1 minute for it to boot up again.
 
 ### Built With
 * React
